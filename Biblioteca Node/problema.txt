@@ -1,0 +1,8 @@
+Qual problema minha aplicação vai resolver
+
+Analisar textos e ver onde palavras se repetem com muita frequência;
+
+
+Bibliotecas são pacotes de códigos que resolvem problemas ou necessidades especificas
+São necessárias para não ter que inventar a roda novamente.
+console.log é um exemplo de Bibliotecas
