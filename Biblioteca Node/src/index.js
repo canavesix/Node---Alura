@@ -5,7 +5,8 @@ const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2];
 
 fs.readFile(link, 'utf-8', (erro, texto) =>{
-    verficaPalavrasDuplicadas(texto);
+    quebraEmParafrafos(texto);
+    // verficaPalavrasDuplicadas(texto);
 })
 
 
@@ -19,6 +20,14 @@ fs.readFile(link, 'utf-8', (erro, texto) =>{
 //     "computador": 4
 // }
 
+function quebraEmParafrafos(texto){
+    const paragrafos = texto.toLowerCase().split('\n');
+    const contagem = paragrafos.map((paragrafo)=>{
+        return verficaPalavrasDuplicadas(paragrafo);
+    })
+    console.log(contagem);
+}
+
 
 function verficaPalavrasDuplicadas(texto){
     const listaPalavra = texto.split(' ');
@@ -27,6 +36,6 @@ function verficaPalavrasDuplicadas(texto){
     listaPalavra.forEach(palavra => {
         resultado[palavra] = (resultado[palavra] || 0) + 1
     })
-    console.log(resultado);
+    return resultado;
     
 }
