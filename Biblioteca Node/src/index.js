@@ -15,27 +15,35 @@ fs.readFile(link, 'utf-8', (erro, texto) =>{
 // contar as ocorrencias
 // montar um objeto com o resultado:
 
-// {
-//     "web": 5;,
-//     "computador": 4
-// }
+
 
 function quebraEmParafrafos(texto){
     const paragrafos = texto.toLowerCase().split('\n');
-    const contagem = paragrafos.map((paragrafo)=>{
+    const contagem = paragrafos.flatMap((paragrafo)=>{
+        if(!paragrafo) return [];
         return verficaPalavrasDuplicadas(paragrafo);
     })
     console.log(contagem);
 }
 
 
+// remover caracteres especiais
+function limpaPalavras(palavra){
+    // expressão regular, o g no final significa global
+    return palavra.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ''); 
+}
+
 function verficaPalavrasDuplicadas(texto){
     const listaPalavra = texto.split(' ');
     const resultado = {};
     // objeto[propriedade] = valor;
     listaPalavra.forEach(palavra => {
+        if(palavra.length >= 3){
+        const palavraLimpa = limpaPalavras(palavra);
         resultado[palavra] = (resultado[palavra] || 0) + 1
+        }
+        
     })
     return resultado;
-    
 }
+
