@@ -1,3 +1,8 @@
+// percorrer o texto e verficar palavras duplicadas
+// criar um array de palavras
+// contar as ocorrencias
+// montar um objeto com o resultado:
+
 // interage com os arquivos do computador
 const fs = require('fs');
 
@@ -5,20 +10,16 @@ const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2];
 
 fs.readFile(link, 'utf-8', (erro, texto) =>{
-    quebraEmParafrafos(texto);
-    // verficaPalavrasDuplicadas(texto);
+    if(erro){
+        console.log('Qual é o erro?', erro);
+        return
+    }
+    console.log('Qual é o erro?', erro);
+    contaPalavras(texto);
 })
 
-
-// percorrer o texto e verficar palavras duplicadas
-// criar um array de palavras
-// contar as ocorrencias
-// montar um objeto com o resultado:
-
-
-
-function quebraEmParafrafos(texto){
-    const paragrafos = texto.toLowerCase().split('\n');
+function contaPalavras(texto){
+    const paragrafos = extraiParagrafos(texto)
     const contagem = paragrafos.flatMap((paragrafo)=>{
         if(!paragrafo) return [];
         return verficaPalavrasDuplicadas(paragrafo);
@@ -26,6 +27,9 @@ function quebraEmParafrafos(texto){
     console.log(contagem);
 }
 
+function extraiParagrafos(texto){
+    return texto.toLowerCase().split('\n');
+}
 
 // remover caracteres especiais
 function limpaPalavras(palavra){
@@ -36,11 +40,10 @@ function limpaPalavras(palavra){
 function verficaPalavrasDuplicadas(texto){
     const listaPalavra = texto.split(' ');
     const resultado = {};
-    // objeto[propriedade] = valor;
     listaPalavra.forEach(palavra => {
         if(palavra.length >= 3){
         const palavraLimpa = limpaPalavras(palavra);
-        resultado[palavra] = (resultado[palavra] || 0) + 1
+        resultado[palavra] = (resultado[palavraLimpa] || 0) + 1
         }
         
     })
