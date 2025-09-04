@@ -3,23 +3,7 @@
 // contar as ocorrencias
 // montar um objeto com o resultado:
 
-// interage com os arquivos do computador
-const fs = require('fs');
-const trataErros = require('./erros/funcoesErros');
-
-const caminhoArquivo = process.argv;
-const link = caminhoArquivo[2];
-
-fs.readFile(link, 'utf-8', (erro, texto) =>{
-    try {
-      if (erro) throw erro
-      contaPalavras(texto);
-    } catch(erro){
-      trataErros(erro);
-    }
-})
-
-function contaPalavras(texto){
+export function contaPalavras(texto){
     const paragrafos = extraiParagrafos(texto)
     const contagem = paragrafos.flatMap((paragrafo)=>{
         if(!paragrafo) return [];
