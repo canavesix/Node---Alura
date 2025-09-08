@@ -2,6 +2,7 @@
 import fs from 'fs';
 import trataErros from './erros/funcoesErros.js';
 import { contaPalavras } from './index.js';
+import { log } from 'console';
 const caminhoArquivo = process.argv;
 const link = caminhoArquivo[2];
 const endereco = caminhoArquivo[3];
@@ -26,3 +27,17 @@ async function criaESalvaArquivo(listaPalavra, endereco) {
     throw erro;
   }
 }
+
+//  function criaESalvaArquivo(listaPalavra, endereco) {
+//   const arquivoNovo = `${endereco}/resultado.txt`;
+//   const textoPalavras = JSON.stringify(listaPalavra);
+//   fs.promises.writeFile(arquivoNovo, textoPalavras)
+//     .then(()=>{
+//       console.log('Arquivo criado')
+//     })
+//     .catch((erro)=>{
+//       throw erro
+//     })
+//     .finally(()=> console.log('Operação finalizada')
+//     )
+//   }
