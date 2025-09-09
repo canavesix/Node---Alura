@@ -3,6 +3,23 @@ import fs from 'fs';
 import trataErros from './erros/funcoesErros.js';
 import { contaPalavras } from './index.js';
 import { montaSaidaArquivo } from './helpers.js';
+import { Command } from 'commander';
+
+const program = new Command(); 
+
+program
+  .version('0.0.1')
+  .option('-t, --texto <string>', 'caminho do texto a ser processado')
+  .option('-d, --destino <string>', 'caminho da pasta onde salvar o arquivo de resultados')
+  .action((options) => {
+    const { texto, destino } = options;
+
+    if (!texto || !destino ) {
+      console.error('erro: favor inserir caminho de origem e destino');
+      program.help();
+      return;
+    }
+  })
 
 
 const caminhoArquivo = process.argv;
@@ -29,17 +46,3 @@ async function criaESalvaArquivo(listaPalavra, endereco) {
     throw erro;
   }
 }
-
-//  function criaESalvaArquivo(listaPalavra, endereco) {
-//   const arquivoNovo = `${endereco}/resultado.txt`;
-//   const textoPalavras = JSON.stringify(listaPalavra);
-//   fs.promises.writeFile(arquivoNovo, textoPalavras)
-//     .then(()=>{
-//       console.log('Arquivo criado')
-//     })
-//     .catch((erro)=>{
-//       throw erro
-//     })
-//     .finally(()=> console.log('Operação finalizada')
-//     )
-//   }
